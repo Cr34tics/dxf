@@ -345,7 +345,7 @@ export default (parsed) => {
           acc.bbox.expandByPoint(bbox.max)
         }
         acc.elements.push(
-          `<g layer="${entity.layer}" stroke="${rgbToColorAttribute(rgb)}">${element}</g>`,
+          `<g name="${entity.name}" layer="${entity.layer}" stroke="${rgbToColorAttribute(rgb)}">${element}</g>`,
         )
       }
       return acc

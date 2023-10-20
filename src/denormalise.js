@@ -60,6 +60,10 @@ export default (parseResult) => {
             const blockEntities = block.entities.map((be) => {
               const be2 = cloneDeep(be)
 
+              let name = block.name.replace(/\s/g, "_")
+              if (name.endsWith('_M')) name = name.slice(0, -2)
+              be2.name = name
+
               // Don't remove layer information. It's needed and used in the exported SVG.
               // XXX be2.layer = insert.layer
 
