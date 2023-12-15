@@ -68,6 +68,28 @@ const circle = (entity) => {
 }
 
 /**
+ *  Create a <circle /> element with radius r=1.0 for the POINT entity.
+ */
+const point = (entity) => {
+  const r = 1.0
+  const bbox0 = new Box2()
+    .expandByPoint({
+      x: entity.x + r,
+      y: entity.y + r,
+    })
+    .expandByPoint({
+      x: entity.x - r,
+      y: entity.y - r,
+    })
+  const element0 = `<circle cx="${entity.x}" cy="${entity.y}" r="${r}" />`
+  const { bbox, element } = addFlipXIfApplicable(entity, {
+    bbox: bbox0,
+    element: element0,
+  })
+  return transformBoundingBoxAndElement(bbox, element, entity.transforms)
+}
+
+/**
  * Create a a <path d="A..." /> or <ellipse /> element for the ARC or ELLIPSE
  * DXF entity (<ellipse /> if start and end point are the same).
  */
@@ -324,6 +346,8 @@ const entityToBoundsAndElement = (entity) => {
     case 'POLYLINE': {
       return polyline(entity)
     }
+    case 'POINT':
+      return point(entity)
     default:
       logger.warn('entity type not supported in SVG rendering:', entity.type)
       return null
