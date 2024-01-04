@@ -69,24 +69,46 @@ const circle = (entity) => {
 
 /**
  *  Create a <circle /> element with radius r=1.0 for the POINT entity.
+ *  Except for points with angle, which are rendered as a line.
  */
 const point = (entity) => {
-  const r = 1.0
-  const bbox0 = new Box2()
-    .expandByPoint({
-      x: entity.x + r,
-      y: entity.y + r,
+  if (entity.angle) {
+    const z = entity.z
+    const angle = (entity.angle * Math.PI) / 180.0
+    const x1 = entity.x
+    const y1 = entity.y
+    const x2 = x1 + Math.cos(angle) * z
+    const y2 = y1 + Math.sin(angle) * z
+
+    const bbox = new Box2()
+      .expandByPoint({
+        x: x1,
+        y: y1,
+      })
+      .expandByPoint({
+        x: x2,
+        y: y2,
+      })
+    const element = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" />`
+    return transformBoundingBoxAndElement(bbox, element, entity.transforms)
+  } else {
+    const r = 1.0
+    const bbox0 = new Box2()
+      .expandByPoint({
+        x: entity.x + r,
+        y: entity.y + r,
+      })
+      .expandByPoint({
+        x: entity.x - r,
+        y: entity.y - r,
+      })
+    const element0 = `<circle cx="${entity.x}" cy="${entity.y}" r="${r}" />`
+    const { bbox, element } = addFlipXIfApplicable(entity, {
+      bbox: bbox0,
+      element: element0,
     })
-    .expandByPoint({
-      x: entity.x - r,
-      y: entity.y - r,
-    })
-  const element0 = `<circle cx="${entity.x}" cy="${entity.y}" r="${r}" />`
-  const { bbox, element } = addFlipXIfApplicable(entity, {
-    bbox: bbox0,
-    element: element0,
-  })
-  return transformBoundingBoxAndElement(bbox, element, entity.transforms)
+    return transformBoundingBoxAndElement(bbox, element, entity.transforms)
+  }
 }
 
 /**
