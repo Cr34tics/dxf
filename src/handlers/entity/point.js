@@ -20,6 +20,9 @@ export const process = (tuples) => {
         case 39:
           entity.thickness = value
           break
+        case 50:
+          entity.angle = value
+          break
         default:
           Object.assign(entity, common(type, value))
           break
