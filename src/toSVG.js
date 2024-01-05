@@ -89,7 +89,7 @@ const point = (entity) => {
         x: x2,
         y: y2,
       })
-    const element = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" />`
+    const element = `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" angle="${entity.angle}" z="${z}"/>`
     return transformBoundingBoxAndElement(bbox, element, entity.transforms)
   } else {
     const r = 1.0
