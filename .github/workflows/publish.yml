@@ -20,6 +20,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install NPM
         run: npm ci --include=dev
+      - run: |
+          echo registry=https://npm.pkg.github.com/ > .npmrc
+          echo always-auth=true >> .npmrc
+          echo _authToken=${{ secrets.GITHUB_TOKEN }} >> .npmrc
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
