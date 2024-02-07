@@ -10,20 +10,14 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v3
         with:
           node-version: '18.x'
           cache: npm
           registry-url: 'https://npm.pkg.github.com'
-      - name: Add token to .npmrc
-        env:
-          token: ${{ secrets.NPM_PACKAGES_TOKEN }}
-        run: |
-          echo "//npm.pkg.github.com/:_authToken=$token" >> .npmrc
-      - name: Install npm
+          scope: '@cr34tics'
+      - name: Install NPM
         run: npm ci --include=dev
-      - name: Build and test
-        run: npm publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
