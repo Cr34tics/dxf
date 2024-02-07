@@ -15,9 +15,9 @@ updates:
       devDependencies:
         dependency-type: 'development'
     ignore:
-      - dependecy-name: 'react'
+      - dependency-name: 'react'
         versions: ['17', '18']
-      - dependecy-name: 'react-dom'
+      - dependency-name: 'react-dom'
         versions: ['17', '18']
-      - dependecy-name: 'react-router-dom'
+      - dependency-name: 'react-router-dom'
               versions: ['6']
