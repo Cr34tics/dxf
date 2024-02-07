@@ -1,0 +1,27 @@
+name: PR Unit tests
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: npm
+      - name: Install npm
+        run: npm install --package-lock-only
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm run test
