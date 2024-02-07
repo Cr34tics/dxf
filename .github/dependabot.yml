@@ -10,10 +10,14 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
-      react:
-        patterns:
-          - ^react.*
       dependencies:
         dependency-type: 'production'
       devDependencies:
         dependency-type: 'development'
+    ignore:
+      - dependecy-name: 'react'
+        versions: ['17', '18']
+      - dependecy-name: 'react-dom'
+        versions: ['17', '18']
+      - dependecy-name: 'react-router-dom'
+              versions: ['6']
