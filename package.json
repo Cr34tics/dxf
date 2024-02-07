@@ -1,5 +1,5 @@
 {
-  "name": "dxf",
+  "name": "@cr34tics/dxf",
   "version": "5.2.6",
   "description": "DXF parser for node/browser",
   "main": "lib/index.js",
