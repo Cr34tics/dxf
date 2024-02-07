@@ -20,4 +20,4 @@ updates:
       - dependency-name: 'react-dom'
         versions: ['17', '18']
       - dependency-name: 'react-router-dom'
-              versions: ['6']
+        versions: ['6']
