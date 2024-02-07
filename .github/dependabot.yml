@@ -10,10 +10,10 @@ updates:
     schedule:
       interval: 'weekly'
     groups:
+      react:
+        patterns:
+          - ^react.*
       dependencies:
         dependency-type: 'production'
       devDependencies:
         dependency-type: 'development'
-      react:
-        patterns:
-          - ^react.*
